@@ -1,11 +1,29 @@
-from setuptools import find_packages, setup  # noqa: D100
+"""Setup configuration for ReverieVis package."""
+
+import re
+from pathlib import Path
+
+from setuptools import find_packages, setup
+
+FILE = Path(__file__).resolve()
+PARENT = FILE.parent
 
 with open("README.md") as f:
     long_description = f.read()
 
+
+def get_version() -> str:
+    """Get the version of the package."""
+    file = PARENT / "src/reverievis/__init__.py"
+    results = re.search(r'^__version__ = [\'"]([^\'"]*)[\'"]', file.read_text(encoding="utf-8"), re.M)
+    if results:
+        return results[1]
+    raise RuntimeError("Unable to find version string.")
+
+
 setup(
     name="reverievis",
-    version="0.1.0",
+    version=get_version(),
     author="ragilhadi",
     author_email="ragilprasetyo310@gmail.com",
     description="A professional package for creating beautiful visualizations with clean, object-oriented design",
