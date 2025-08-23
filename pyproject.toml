@@ -1,0 +1,78 @@
+# pyproject.toml
+
+[tool.ruff]
+line-length = 120
+fix = true
+lint.select = [
+    "A",
+    "ANN",
+    "ARG",
+    "B",
+    "B9",
+    "C",
+    "D",
+    "E",
+    "F",
+    "I",
+    "N",
+    "PL",
+    "PT",
+    "PYI",
+    "Q",
+    "RET",
+    "S",
+    "SIM",
+    "TID",
+    "UP",
+    "W",
+]
+lint.ignore = [
+    "ANN101", # Missing type annotation for 'cls'
+    "ANN102", # Missing type annotation for 'self'
+    "ANN204", # Checks that "special" methods, like __init__, __new__, and __call__, have return type annotations.
+    "C901",
+    "D415",
+    "E266",
+    "E501",
+    "E731", # Do not assign a lambda expression, use a def
+    "B008",
+    "B026",
+    "B028",
+    "D107",
+    "PLR0911", # Too many return statements (in `convert_date_format`)
+    "PLR0912", # Too many branches (in quite so many places)
+    "PLR0913",
+    "PLR0915",
+    "PLR2004", # Magic value used in comparison: in so many places
+    "PYI041", # Use `float` instead of `int | float`
+]
+exclude = [
+    "*.git",
+    "*.hg",
+    "*.mypy_cache",
+    "*.tox",
+    "*.venv",
+    "_build",
+    "buck-out",
+    "build",
+    "dist"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" = ["ANN", "D", "S101", "PLR"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-single-line = false
+split-on-trailing-comma = true
+known-first-party = ["postprocessor", "common_utility", "dynamic_ocr_evaluation", "document_orchestrator", "table_mapper"]
+known-third-party = ["numpy", "pandas", "requests", "opencv", "django", "flask"]
+default-section = "third-party"
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
+indent-style = "space"
